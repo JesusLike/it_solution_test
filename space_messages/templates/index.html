@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>Space Messages</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+		<link rel="stylesheet" href="{% static 'css/main.css' %}">
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+		
+		<script>
+			var api = {
+				getMessages: "{% url 'space_messages:get_messages' %}",
+				markRead: "{% url 'space_messages:mark_read' %}"
+			}
+		</script>
+
+		<script defer src="{% static 'js/main.js' %}"></script>
+		<script defer src="{% static 'js/message.js' %}"></script>
+		
+	</head>
+	<body>
+		<div class="main-container" id="space-messages">
+			<header class="bg-info text-center text-light">
+				<td>
+					<h1>Space Messages</h1>
+				</td>		
+			</header>
+			<main class="container-fluid bg-light">
+				<message-item 
+					v-for="item in messages" 
+					v-bind:key="item.id" 
+					v-bind:message="item"></message-item>
+			</main>
+		</div>
+	</body>
+</html>
+
