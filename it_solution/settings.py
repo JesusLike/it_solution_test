@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'credit_calc.apps.CreditCalcConfig',
     'space_messages.apps.SpaceMessagesConfig',
     'django.contrib.admin',
     'django.contrib.auth',

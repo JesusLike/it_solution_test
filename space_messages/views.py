@@ -6,7 +6,7 @@ from django.core import serializers
 from .models import Message
 
 class IndexView(generic.ListView):
-	template_name = "index.html"
+	template_name = "space_messages/index.html"
 
 	def get_queryset(self):
 		return Message.objects.filter(is_read=False).order_by('-date')
