@@ -1,0 +1,60 @@
+body {
+	padding-top: 20px;
+}
+
+table {
+	table-layout: fixed;
+	border: 2px solid #666666;
+}
+
+td {
+	border: 1px solid #cccccc;
+	padding: 5px;
+}
+
+tr:first-child, tr:last-child {
+	background-color: #eeeeee;
+}
+
+table input {
+	width: inherit;
+	height: inherit;
+	border: none;
+}
+
+table input:focus {
+	outline: none;
+}
+
+input:disabled {
+	background-color: transparent;
+}
+
+.table-container > * {
+	margin: 5px;
+}
+
+.input-table td input {
+	width: 340px;
+}
+
+.input-table td:first-child input {
+	width: 120px;
+}
+
+.calculated-table td input {
+	width: 400px;
+}
+
+label {
+	width: 450px;
+	margin: 5px;
+}
+
+label input {
+	float: right;
+}
+
+#calculate {
+	margin: 5px;
+}

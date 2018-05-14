@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Credit Calculator</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">	
+	<link rel="stylesheet" href="{% static 'credit_calc/css/main.css' %}">
+	
+
+	<script>
+		var apiCalculateURL = "{% url 'credit_calc:calculate' %}";
+	</script>
+
+	<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+	<script defer src="{% static 'credit_calc/js/vue-table.js' %}"></script>
+	<script defer src="{% static 'credit_calc/js/main.js' %}"></script>
+</head>
+<body>
+	<div class="container-fluid" id="credit-calc">
+		<div>
+			<vue-table
+				v-bind:table-data="creditData"
+				v-bind:editable="true"
+				v-bind:table-class="inputTableClass"
+				v-bind:header="inputHeader"></vue-table>
+			<label>
+				<span>Дата начисления процентов:</span>
+				<input type="text" 
+					v-model="interestDate">
+			</label>
+			<br>
+			<label>
+				<span>Процентная ставка (годовых):</span>
+				<input type="text"
+					v-model="interestRate">
+			</label>
+		</div>
+		<button id="calculate" v-on:click="calculate()">Рассчитать</button>
+		<vue-table
+			v-bind:editable="false"
+			v-bind:table-data="interestFlowData"
+			v-bind:header="calculatedHeader"
+			v-bind:table-class="calculatedTableClass"
+			v-if="interestFlowCalculated"></vue-table>
+	</div>
+</body>
+</html>
