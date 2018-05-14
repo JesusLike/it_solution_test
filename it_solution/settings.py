@@ -25,7 +25,7 @@ SECRET_KEY = 'mg&75zg&n18czmp83shlc28!14)6@ip$hudb^_beg_!*6b&=@n'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['yudovich.pythonanywhere.com']
 
 
 # Application definition
@@ -53,6 +53,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'it_solution.urls'
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 TEMPLATES = [
     {

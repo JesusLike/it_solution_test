@@ -1,0 +1,27 @@
+html, body, .main-container {
+	height: 100%;
+}
+
+header {
+	height: auto;
+	padding: 30px;
+}
+
+main {
+	overflow: auto;
+}
+
+.message {
+	min-height: 3em;
+	padding: 1em;
+	margin-bottom: 0;
+	border-radius: 0;
+	word-wrap: break-word;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .2s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
