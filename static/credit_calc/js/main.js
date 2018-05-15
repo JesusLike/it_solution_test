@@ -39,13 +39,19 @@ window.onload = function() {
 					}));
 					xhr.onreadystatechange = function() {
 						if (xhr.readyState == 4 && xhr.status == 200) {
+							var jsonResponse;
+							try {
+								jsonResponse = JSON.parse(xhr.responseText);
+							} catch (SyntaxError) {
+								alert(xhr.responseText);
+								return;
+							}
 							flowData = Array.prototype.map.call(JSON.parse(xhr.responseText), function(item) {
 								return item.fields;
 							});
 							creditCalc.interestFlowData = [	[{data: "Дата начисления процентов"},
 															{data: "Начислено за месяц"}]];
 							for (var i = 0; i < flowData.length; i++) {
-								console.log(typeof(flowData[i].date) + ": " + flowData[i].date);
 								var jsDate = new Date(flowData[i].date);
 								creditCalc.interestFlowData.push([
 									{data: 	(jsDate.getDate() > 9 ? jsDate.getDate() : "0" + jsDate.getDate()) + "." +
