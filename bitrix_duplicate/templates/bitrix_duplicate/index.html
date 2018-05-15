@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Bitrix Duplicates</title>
+</head>
+<body>
+	<div id="main"></div>
+	<script>
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET", "{% url 'bitrix_duplicate:find_duplicates' %}");
+		xhr.send();
+
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4 && xhr.status == 200) {
+				document.getElementById("main").innerHTML = xhr.responseText;
+			}
+		}
+	</script>
+</body>
+</html>
