@@ -20,13 +20,17 @@ def calculate(request):
 	
 	data = json.loads(request.body.decode("utf-8"))
 	credit_operations = []
-	for row in data["creditData"]:
-		#print(row[2]["data"] == "")
-		credit_operations.append(CreditOperation(datetime.strptime(row[0]["data"], "%d.%m.%Y"), 
-			0 if row[1]["data"] == "" else float(row[1]["data"]), 
-			0 if row[2]["data"] == "" else float(row[2]["data"])))
-	interest_rate = float(data["interestRate"]) / 100
-	interest_date = int(data["interestDate"])
+	try:
+		for row in data["creditData"]:
+			if (len(row[0]["data"]) == 0):
+				continue
+			credit_operations.append(CreditOperation(datetime.strptime(row[0]["data"], "%d.%m.%Y"), 
+				0 if row[1]["data"] == "" else float(row[1]["data"]), 
+				0 if row[2]["data"] == "" else float(row[2]["data"])))
+		interest_rate = float(data["interestRate"]) / 100
+		interest_date = int(data["interestDate"])
+	except ValueError:
+		return HttpResponse("Неправильный формат введенных данных");
 	interest_flow = []
 	
 	it = 0
@@ -34,7 +38,6 @@ def calculate(request):
 	current_date = credit_operations[0].date 
 	current_debt = 0
 	while current_date <= credit_operations[-1].date:
-		print(str(current_date) + ": " + str(current_debt * interest_rate / 365) + "/" + str(current_flow_sum))
 		current_flow_sum += current_debt * interest_rate / (365 + is_year_leap(current_date.year))
 		if current_date == credit_operations[it].date:
 			current_debt += credit_operations[it].deposit - credit_operations[it].repayment
@@ -43,7 +46,6 @@ def calculate(request):
 			(current_date.day == days_in_month(current_date) and interest_date > current_date.day) or
 			(current_date == credit_operations[-1].date and current_flow_sum != 0)):
 			interest_flow.append(InterestFlow(current_date, current_flow_sum))
-			print(interest_flow[-1].flow)
 			current_flow_sum = 0
 		current_date += timedelta(days=1)
 	return HttpResponse(serializers.serialize('json', interest_flow))

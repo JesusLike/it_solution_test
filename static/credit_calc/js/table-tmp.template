@@ -1,0 +1,9 @@
+<button id="add-row" v-on:click="addRow()" v-if="editable">Добавить</button>
+<table>
+	<tr v-for="row in tableData">
+		<td v-for="cell in row" v-bind:class="cell.class">
+			<input v-bind:disabled="!cell.editable" type="text" 
+			v-bind:value="typeof(cell) == function ? cell.data() : cell.data">
+		</td>
+	</tr>
+</table>
