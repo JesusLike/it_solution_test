@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('bitrix_duplicate', include('bitrix_duplicate.urls')),
+    path('bitrix_duplicate/', include('bitrix_duplicate.urls')),
 	path('credit_calc/', include('credit_calc.urls')),
 	path('space_messages/', include('space_messages.urls')),
     path('admin/', admin.site.urls),

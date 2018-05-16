@@ -25,8 +25,8 @@ SECRET_KEY = 'mg&75zg&n18czmp83shlc28!14)6@ip$hudb^_beg_!*6b&=@n'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['yudovich.pythonanywhere.com']
-
+ALLOWED_HOSTS = ['yudovich.pythonanywhere.com',
+                 'b24-lc1bfn.bitrix24.ru']
 
 # Application definition
 
