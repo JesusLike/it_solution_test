@@ -5,16 +5,21 @@
 	<title>Bitrix Duplicates</title>
 </head>
 <body>
+    <button id="find-duplicates">Найти дубликаты</button>
+    <br>
+    <br>
 	<div id="main"></div>
 	<script>
-		var xhr = new XMLHttpRequest();
-		xhr.open("GET", "{% url 'bitrix_duplicate:find_duplicates' %}");
-		xhr.send();
+		document.getElementById("find-duplicates").onclick = function() {
+		    var xhr = new XMLHttpRequest();
+		    xhr.open("POST", "{% url 'bitrix_duplicate:find_duplicates' %}");
+		    xhr.send("{{ auth_id }}");
 
-		xhr.onreadystatechange = function() {
-			if (xhr.readyState == 4 && xhr.status == 200) {
-				document.getElementById("main").innerHTML = xhr.responseText;
-			}
+		    xhr.onreadystatechange = function() {
+			    if (xhr.readyState == 4 && xhr.status == 200) {
+			    	document.getElementById("main").innerHTML = xhr.responseText;
+			    }
+		    }
 		}
 	</script>
 </body>
